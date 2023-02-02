@@ -3,28 +3,21 @@ import os, tarfile
 
 
 user = input()
-if user == '-help':
-    print("c (create), filename(s)")
-    print("x (extract), dst")
-archive = input()
 
 # check if user should have access to file
-
-if archive == 'c':
+if user == 'c':
     # create the tar file obj
-    tar = tarfile.open(name='somename.tar', mode='w')
-    files = ['foo.txt']
+    tar = tarfile.open(name='foogoo.tar', mode='w')
+    # list the files to be put in the .tar
+    files = ['src/foo.txt', 'src/goo.gif']
     # write in the desired files
     for f in files:
         tar.add(f)
     tar.close()
-
-    # # save that new file as a tar
-    # open(src, 'wb').write(open(src, 'rb').read())
-    # print("success")
-elif archive == "e":
+    print("success")
+elif user == 'e':
     # extract the file and store in another directory
-    open(dst, 'wb').write(open(src, 'rb').read())
+    open(os.listdir('dst'), 'wb').write(open(os.listdir, 'rb').read())
     print("success")
 else:
     print("you must enter c or e")
