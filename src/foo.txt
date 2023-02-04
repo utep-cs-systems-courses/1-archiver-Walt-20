@@ -1,1 +1,6 @@
+goo.gif:107
+foo.txt:37
+This is the contents of file foo.txt
+goo.gif:48
+foo.txt:37
 This is the contents of file foo.txt
