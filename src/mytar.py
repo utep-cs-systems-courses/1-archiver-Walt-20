@@ -29,16 +29,15 @@ def mytar(mode, file_names):
         os.close(tar_fd)
         sys.stdout.write("success\n")
     else:
+        f_names = ["foo.txt", "goo.gif"]
         # open the archived file
         for file_name in file_names:
             tar_fd = os.open(file_name, os.O_RDONLY)
         # read its contents
             file_info = os.stat(file_name)
             file_size = file_info.st_size
-            file_content = os.read(tar_fd, file_size).decode()
-            # print(file_content)
-            sys.stdout.write(str(file_content))
-        sys.stdout.write("need to work on extraction\n")
+            file_content = os.read(tar_fd, file_size).decode()  
+            sys.stdout.write(file_content)
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
