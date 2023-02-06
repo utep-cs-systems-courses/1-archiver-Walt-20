@@ -6,7 +6,7 @@ def mytar(mode, file_names):
         # create the tar file
         tar_file = "archive.tar"
         # open the tar_file for storing
-        tar_fd = os.open(tar_file, os.O_CREAT | os.O_WRONLY, 0o664) 
+        tar_fd = os.open(tar_file, os.O_CREAT | os.O_WRONLY) 
         # looking through all files provided
         for file_name in file_names:
             # setting the file descriptor equal to the # current file
@@ -29,6 +29,15 @@ def mytar(mode, file_names):
         os.close(tar_fd)
         sys.stdout.write("success\n")
     else:
+        # open the archived file
+        for file_name in file_names:
+            tar_fd = os.open(file_name, os.O_RDONLY)
+        # read its contents
+            file_info = os.stat(file_name)
+            file_size = file_info.st_size
+            file_content = os.read(tar_fd, file_size).decode()
+            # print(file_content)
+            sys.stdout.write(str(file_content))
         sys.stdout.write("need to work on extraction\n")
 
 if __name__ == '__main__':
