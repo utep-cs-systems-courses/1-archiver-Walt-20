@@ -3,6 +3,7 @@ import sys
 
 # take a look at bufferreader in fd-io-demos repository 
 # check out write file as well and the while loop. Index slicing till we get all the buffer
+# do this ^
 
 def mytar(file_names, tar_names):
     # create the tar file
