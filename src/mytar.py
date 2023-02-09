@@ -7,9 +7,8 @@ import sys
 
 
 def mytar(file_names, target_file):
-
     # open the tar_file for storing
-    tar_fd = os.open(target_file, os.O_CREAT | os.O_WRONLY) 
+    tar_fd = os.open(target_file,  os.O_WRONLY | os.O_CREAT | os.O_TRUNC) 
     # looking through all files provided
     for file_name in file_names:
         # setting the file descriptor equal to the # current file
@@ -20,12 +19,8 @@ def mytar(file_names, target_file):
         file_size = file_info.st_size
         # reading the file descriptor and size
         file_content = os.read(fd, file_size)
-        # creating tar header with encoding
-        header = f"{file_name}:{file_size}\n".encode()
-        # write header of to tar descriptor
-        os.write(tar_fd, header)
         # write file contents to tar descriptor
-        # os.write(tar_fd, file_content)
+        os.write(tar_fd, file_content)
         # close current file descriptor
         os.close(fd)
     # close tar descriptor
@@ -41,9 +36,9 @@ def extract_tar(target_file):
     file_size = file_info.st_size
     # read the file content
     file_content = os.read(tar_fd, file_size).decode()
-    # use information found in headers to create files and write contents
-    sys.stdout.write(file_content)
+    # print out the file contents
     os.close(tar_fd)
+    sys.stdout.write(file_content)
 
 if __name__ == '__main__':
     mode = sys.argv[1]
